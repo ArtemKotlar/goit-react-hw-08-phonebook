@@ -6,9 +6,9 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { customAlphabet } from 'nanoid';
-import { getAllContacts } from 'redux/contacts/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
 import { ToastContainer, toast } from 'react-toastify';
-import { addContact } from 'redux/contacts/options';
+import { addContact } from 'redux/contacts/operation';
 
 const ErrorText = styled.p`
   color: red;
@@ -36,13 +36,13 @@ const initialValues = {
 };
 
 const Forms = () => {
-  const contacts = useSelector(getAllContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: 'id' + nanoid(),
-      name: values.name,
+      name: values.name.trim(),
       number: values.number,
     };
     if (contacts.find(contact => contact.name === newContact.name)) {

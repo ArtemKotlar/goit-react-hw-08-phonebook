@@ -1,16 +1,19 @@
-import { WRAPPER } from './UserMenu.styled';
-import { getUserName } from 'redux/auth/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
+import { useAuth } from 'hooks/useAuth';
+import { logOut } from 'redux/auth/operation';
+import { Button } from '../App.styled';
+import { UserBlock, UserName } from './UserMenu.styled';
+
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const name = useSelector(getUserName);
+  const { user } = useAuth();
+
   return (
-    <WRAPPER>
-      <p>Hello,{name}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Logout
-      </button>
-    </WRAPPER>
+    <UserBlock>
+      <UserName>Welcome, {user.name}</UserName>
+      <Button type="button" onClick={() => dispatch(logOut())}>
+        Log out
+      </Button>
+    </UserBlock>
   );
 };

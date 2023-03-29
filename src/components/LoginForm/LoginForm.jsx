@@ -1,10 +1,8 @@
-import { Box } from 'components/Box';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
-
-import { Label, Btn, Input } from './LoginForm.styled';
-
+import { logIn } from 'redux/auth/operation';
+import { Container, Section, Button, BlockForm } from '../App.styled';
+import { Label, Input } from '../App.styled';
 
 const initialValues = {
   email: '',
@@ -20,33 +18,22 @@ export const LoginForm = () => {
   };
 
   return (
-    <Box
-      p={4}
-      m="auto"
-      bg="primary"
-      width=" 300px"
-      display="flex"
-      flexDirection="column"
-      textAlign="center"
-      borderRadius="normal"
-      border="normal"
-      boxShadow="shadow"
-    >
-      <div>
+    <Container>
+      <Section>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           <Form>
-            <div>
+            <BlockForm>
               <Label htmlFor="email">Email</Label>
               <Input type="text" name="email" id="email" />
 
               <Label htmlFor="password">Password</Label>
               <Input type="password" name="password" id="password" />
 
-              <Btn type="submit">Login</Btn>
-            </div>
+              <Button type="submit">Login</Button>
+            </BlockForm>
           </Form>
         </Formik>
-      </div>
-    </Box>
+      </Section>
+    </Container>
   );
 };

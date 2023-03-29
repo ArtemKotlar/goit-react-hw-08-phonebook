@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize; 
 
 body {
   margin: 0;
@@ -7,9 +7,50 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	background-color: var(--primary-white);
+	font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+p,
+h1,
+h2,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+.color1 {color: #eccc58;}
+.color2 {color: #dfe487;}
+.color3 {color: #142280;}
+.color4 {color: #1a60b7;}
+.color5 {color: #41aedc;}
+
+:root {
+	--primary-text-color: #142280;
+  --title-text-color: #1a60b7;
+  --accent-color: #eccc58;
+	--accent-second: #dfe487;
+  --primary-white: #fcfcfc;
+  --background: #41aedc;
+  --shadow: -2px -2px 5px #ffffff, 3px 3px 5px rgba(0, 0, 0, 0.1);
+  --i-shadow: inset -2px -2px 5px #ffffff, inset 3px 3px 5px rgba(0, 0, 0, 0.1);
+
+  --good: rgba(96, 205, 74, 0.7);
+  --neutral: rgba(205, 185, 74, 0.7);
+  --bad: rgba(205, 87, 74, 0.7);
 }

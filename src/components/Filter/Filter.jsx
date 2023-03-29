@@ -1,28 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../../redux/contacts/filterSlice';
-import { getFilter } from '../../redux/contacts/selectors';
-import { Wraper, Title, Input } from './Filter.styled';
+import { selectContactsFilter } from '../../redux/filter/selector';
+import { setContactFilter } from 'redux/filter/slice';
+import { Container, Section, Label } from '../App.styled';
+import { FilterInput, FilterBlock } from './Filter.styled';
 
-const Filter = () => {
-  const value = useSelector(getFilter);
+export default function Filter() {
   const dispatch = useDispatch();
+  const filter = useSelector(selectContactsFilter);
 
   return (
-    <Wraper>
-      <label htmlFor="filter">
-        <Title>Find contacts by name</Title>
-        <Input
-          type="text"
-          name="filter"
-          id="filter"
-          value={value}
-          onChange={e => {
-            dispatch(changeFilter(e.target.value));
-          }}
-        />
-      </label>
-    </Wraper>
+    <Container>
+      <Section>
+        <FilterBlock>
+          <Label htmlFor="filter">Find contacts by name</Label>
+          <FilterInput
+            type="text"
+            name="filter"
+            id="filter"
+            value={filter}
+            onInput={e => dispatch(setContactFilter(e.currentTarget.value))}
+          />
+        </FilterBlock>
+      </Section>
+    </Container>
   );
-};
-
-export default Filter;
+}

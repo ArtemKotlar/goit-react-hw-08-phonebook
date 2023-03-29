@@ -1,20 +1,16 @@
 import styled from 'styled-components';
 
-export const Wraper = styled.div`
-  text-align: center;
+export const FilterBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const Title = styled.p`
-  margin-top: 25px;
-  margin-bottom: 10px;
-`;
-
-export const Input = styled.input`
-  width: 280px;
+export const FilterInput = styled.input`
+  width: 200px;
+  height: 25px;
+  margin: 10px 0;
   outline: transparent;
-  padding: 10px;
-  margin: 0;
-  border-radius: 3px;
-  border: 1px solid black;
-  box-shadow: ${p => p.theme.shadows.shadow};
+  border: 2px solid var(--primary-text-color);
+  border-radius: 5px;
 `;

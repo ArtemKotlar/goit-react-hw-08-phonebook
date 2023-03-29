@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const AuthNavList = styled.ul`
+export const NavigateList = styled.ul`
   display: flex;
   gap: 20px;
 `;
 
-export const AuthNavItem = styled.li`
+export const NavigateItem = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;

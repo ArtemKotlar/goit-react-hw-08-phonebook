@@ -1,66 +1,57 @@
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/options';
 import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Layout } from 'pages/Layout/Layout';
-import Home from 'pages/Home/Home';
-import { PublickRoute } from './PublickRoute';
-import { Register } from 'pages/Register/Register';
-import { LoginPage } from 'pages/LoginPage/LoginPage';
-import { PrivateRoute } from './PrivateRoute';
-import { ContactPage } from 'pages/ContactPage/ContactPage';
-import { NotFound } from 'pages/NotFound/NotFound';
+import { refreshUser } from '../redux/auth/operation';
+import { useAuth } from 'hooks';
+import { ContactsPage } from '../pages/Contacts';
+import { HomePage } from '../pages/Home';
+import { LoginPage } from 'pages/Login';
+import { NotFoundPage } from 'pages/ErrorPage';
+import { RegistrationPage } from 'pages/Register';
+import { RestrictedRoute } from './RestrictedRoute';
 
-const App = () => {
+import { PrivateRoute } from './PrivateRoute';
+import { Layout } from './Loyout.jsx/Layout';
+
+export const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route
             path="/register"
             element={
-              <PublickRoute
-                exact
-                path="/register"
+              <RestrictedRoute
+                component={RegistrationPage}
                 redirectTo="/contacts"
-                restricted
-              >
-                <Register />
-              </PublickRoute>
+              />
             }
           />
           <Route
             path="/login"
             element={
-              <PublickRoute
-                exact
-                path="/login"
-                redirectTo="/contacts"
-                restricted
-              >
-                <LoginPage />
-              </PublickRoute>
+              <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
             }
           />
           <Route
             path="/contacts"
             element={
-              <PrivateRoute exact path="/contacts" redirectTo="/login">
-                <ContactPage />
-              </PrivateRoute>
+              <PrivateRoute component={ContactsPage} redirectTo="/login" />
             }
           />
-          <Route path="*" element={<NotFound />} />
         </Route>
+        <Route element={<NotFoundPage />} path="*" />
       </Routes>
     </>
   );
 };
-
-export default App;

@@ -1,9 +1,14 @@
-import { Box } from 'components/Box';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
-
-import { Label, Btn, Input } from '../LoginForm/LoginForm.styled';
+import { register } from '../../redux/auth/operation';
+import {
+  Container,
+  Section,
+  BlockForm,
+  Button,
+  Label,
+  Input,
+} from '../App.styled';
 
 const initialValues = {
   name: '',
@@ -19,22 +24,11 @@ export const RegisterForm = () => {
     resetForm();
   };
   return (
-    <Box
-      p={4}
-      m="auto"
-      bg="primary"
-      width=" 300px"
-      display="flex"
-      flexDirection="column"
-      textAlign="center"
-      borderRadius="normal"
-      border="normal"
-      boxShadow="shadow"
-    >
-      <div>
+    <Container>
+      <Section>
         <Formik initialValues={initialValues} onSubmit={handelSubmit}>
           <Form>
-            <div>
+            <BlockForm>
               <Label htmlFor="name">User name</Label>
               <Input type="text" name="name" id="name" />
 
@@ -44,11 +38,11 @@ export const RegisterForm = () => {
               <Label htmlFor="password">Password</Label>
               <Input type="text" name="password" id="password" />
 
-              <Btn type="submit">Registration</Btn>
-            </div>
+              <Button type="submit">Registration</Button>
+            </BlockForm>
           </Form>
         </Formik>
-      </div>
-    </Box>
+      </Section>
+    </Container>
   );
 };

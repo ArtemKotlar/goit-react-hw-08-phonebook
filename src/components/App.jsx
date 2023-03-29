@@ -1,12 +1,15 @@
-import ContactsList from './Contacts/ContactsList';
-import Filter from './Filter/Filter';
-import Forms from './Forms/Forms';
-import { Box } from './Box';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/options';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/contacts/options';
 import { useEffect } from 'react';
-import { getError, getIsLoading } from 'redux/selectors';
-import { Loader } from './Loader/Loader';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from 'pages/Layout/Layout';
+import Home from 'pages/Home/Home';
+import { PublickRoute } from './PublickRoute';
+import { Register } from 'pages/Register/Register';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
+import { PrivateRoute } from './PrivateRoute';
+import { ContactPage } from 'pages/ContactPage/ContactPage';
+import { NotFound } from 'pages/NotFound/NotFound';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,22 +17,49 @@ const App = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const loading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-
   return (
-    <Box
-      backgroundImage="url(https://kartinkin.net/uploads/posts/2021-07/1625166379_38-kartinkin-com-p-fon-gori-krasivie-foni-42.jpg)"
-      pt={2}
-      pb={8}
-    >
-      <h1 style={{ textAlign: 'center' }}>Phonebook</h1>
-      <Forms />
-      {loading && !error && <Loader />}
-      <h2 style={{ textAlign: 'center' }}>Contacts</h2>
-      <Filter />
-      <ContactsList />
-    </Box>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/register"
+            element={
+              <PublickRoute
+                exact
+                path="/register"
+                redirectTo="/contacts"
+                restricted
+              >
+                <Register />
+              </PublickRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublickRoute
+                exact
+                path="/login"
+                redirectTo="/contacts"
+                restricted
+              >
+                <LoginPage />
+              </PublickRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute exact path="/contacts" redirectTo="/login">
+                <ContactPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

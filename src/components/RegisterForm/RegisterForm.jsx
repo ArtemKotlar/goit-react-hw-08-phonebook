@@ -1,24 +1,23 @@
 import { Box } from 'components/Box';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
+import { register } from 'redux/auth/operations';
 
-import { Label, Btn, Input } from './LoginForm.styled';
-
+import { Label, Btn, Input } from '../LoginForm/LoginForm.styled';
 
 const initialValues = {
+  name: '',
   email: '',
   password: '',
 };
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, { resetForm }) => {
-    dispatch(logIn(values));
+  const handelSubmit = (values, { resetForm }) => {
+    dispatch(register(values));
     resetForm();
   };
-
   return (
     <Box
       p={4}
@@ -33,16 +32,19 @@ export const LoginForm = () => {
       boxShadow="shadow"
     >
       <div>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} onSubmit={handelSubmit}>
           <Form>
             <div>
+              <Label htmlFor="name">User name</Label>
+              <Input type="text" name="name" id="name" />
+
               <Label htmlFor="email">Email</Label>
               <Input type="text" name="email" id="email" />
 
               <Label htmlFor="password">Password</Label>
-              <Input type="password" name="password" id="password" />
+              <Input type="text" name="password" id="password" />
 
-              <Btn type="submit">Login</Btn>
+              <Btn type="submit">Registration</Btn>
             </div>
           </Form>
         </Formik>

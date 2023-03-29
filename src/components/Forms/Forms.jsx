@@ -6,9 +6,9 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { customAlphabet } from 'nanoid';
-import { getAllContacts } from 'redux/selectors';
+import { getAllContacts } from 'redux/contacts/selectors';
 import { ToastContainer, toast } from 'react-toastify';
-import { addContact } from 'redux/options';
+import { addContact } from 'redux/contacts/options';
 
 const ErrorText = styled.p`
   color: red;

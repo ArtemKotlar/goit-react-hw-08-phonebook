@@ -41,11 +41,11 @@ img {
 .color5 {color: #41aedc;}
 
 :root {
-	--primary-text-color: #142280;
-  --title-text-color: #1a60b7;
-  --accent-color: #eccc58;
+	--primary-text-color: #000000;
+  --title-text-color: #0011ff;
+  --accent-color: #befd4a;
 	--accent-second: #dfe487;
-  --primary-white: #fcfcfc;
+  --primary-white: #ffffff;
   --background: #41aedc;
   --shadow: -2px -2px 5px #ffffff, 3px 3px 5px rgba(0, 0, 0, 0.1);
   --i-shadow: inset -2px -2px 5px #ffffff, inset 3px 3px 5px rgba(0, 0, 0, 0.1);
